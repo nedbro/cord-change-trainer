@@ -1,5 +1,8 @@
 # ChordChangeTrainer
 
+A small app which helps you practice your chord changes.
+Just input the chords you want to practice, the chord change interval and the workout length, and you are good to go.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
 ## Development server
