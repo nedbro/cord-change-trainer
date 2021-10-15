@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="workoutForm" (ngSubmit)="submitWorkoutForm()">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Change interval</mat-label>
+        <input
+          name="interval"
+          type="number"
+          formControlName="changeInterval"
+          matInput
+        />
+        <span matSuffix>second(s)</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Workout length</mat-label>
+        <input
+          name="workoutLength"
+          type="number"
+          formControlName="workoutLength"
+          matInput
+        />
+        <span matSuffix>minute(s)</span>
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">submit</button>
+    </form>
+
+    <section class="chord-section">
+      <mat-form-field appearance="fill">
+        <mat-label>Selected chords</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let chord of chords">
+            <div class="chord-select-option">
+              {{ chord }}
+              <mat-icon
+                class="material-icons-outlined"
+                (click)="removeChord(chord)"
+                >delete</mat-icon
+              >
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <form [formGroup]="chordForm" (ngSubmit)="addChord()">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Chord name</mat-label>
+          <input name="chord" type="text" formControlName="chord" matInput />
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit">add</button>
+      </form>
+    </section>
+  </mat-card-content>
+</mat-card>

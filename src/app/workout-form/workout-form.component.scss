@@ -1,0 +1,22 @@
+:host {
+  margin: 1rem;
+}
+
+.form-field {
+  margin: 0 1rem;
+}
+
+.chord-section {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chord-select-option {
+  display: flex;
+  justify-content: space-between;
+
+  .mat-icon {
+    margin: auto 0;
+    cursor: pointer;
+  }
+}
