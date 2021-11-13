@@ -11,11 +11,29 @@ export class AppComponent {
   timeLeft = 0;
   workoutInProgress = false;
   intervals: any[] = [];
+  audio = new Audio();
+  beatCount = 0;
+
+  ngOnInit() {
+    this.audio.src = '../assets/metronome.wav';
+    this.audio.load();
+  }
 
   startWorkout(workout: Workout) {
-    const cordChangeInterval = setInterval(() => {
-      this.getNewChord(workout.chords);
-    }, workout.changeInterval * 1000);
+    this.getNewChord(workout.chords);
+    this.beatCount = 0;
+
+    let bpmInMs = (60 / workout.bpm) * 1000;
+
+    const metronomeInterval = setInterval(() => {
+      this.audio.play().then(r => {
+        this.beatCount += 1;
+        if (this.beatCount === workout.changeInterval) {
+          this.getNewChord(workout.chords);
+          this.beatCount = 0;
+        }
+      });
+    }, bpmInMs);
 
     this.timeLeft = workout.workoutLength * 60000;
     this.workoutInProgress = true;
@@ -24,13 +42,14 @@ export class AppComponent {
       if (this.timeLeft - 1000 > 0) {
         this.timeLeft = this.timeLeft - 1000;
       } else {
-        clearInterval(cordChangeInterval);
+        clearInterval(metronomeInterval);
         clearInterval(countdownInterval);
+        this.currentChord = '';
         this.workoutInProgress = false;
       }
     }, 1000);
 
-    this.intervals = [cordChangeInterval, countdownInterval];
+    this.intervals = [metronomeInterval, countdownInterval];
   }
 
   getNewChord(chords: string[]) {

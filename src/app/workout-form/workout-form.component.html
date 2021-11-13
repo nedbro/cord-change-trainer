@@ -2,14 +2,17 @@
   <mat-card-content>
     <form [formGroup]="workoutForm" (ngSubmit)="submitWorkoutForm()">
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Change interval</mat-label>
+        <mat-label>BPM</mat-label>
+        <input name="bpm" type="number" formControlName="bpm" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Change chord every x beat</mat-label>
         <input
           name="interval"
           type="number"
           formControlName="changeInterval"
           matInput
         />
-        <span matSuffix>second(s)</span>
       </mat-form-field>
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Workout length</mat-label>
